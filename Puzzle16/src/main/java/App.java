@@ -1,5 +1,10 @@
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        Node node = DataAccess.initialNode();
+        node.printState();
+        Node node2 = node.LEFT();
+        node2.printState();
     }
 }
