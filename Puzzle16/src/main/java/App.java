@@ -3,8 +3,11 @@ public class App {
     public static void main(String[] args) {
 
         Node node = DataAccess.initialNode();
-        node.printState();
-        Node node2 = node.LEFT();
-        node2.printState();
+        if(BFS.BFS(node)){
+            System.out.println("DUPA");
+        }else{
+            System.out.println("FALSE");
+        }
+
     }
 }

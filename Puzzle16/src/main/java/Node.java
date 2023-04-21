@@ -1,10 +1,28 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Node {
+
     private  Node parentNode;
     private int [][] state;
     private int zeroPos_X;
     private int zeroPos_Y;
     private char operator;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Node)) return false;
+        Node node = (Node) o;
+        return state == node.getState();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(state);
+    }
 
     public int[][] getState(){
         return this.state;
@@ -70,6 +88,32 @@ public class Node {
         }
         System.out.println(builder.toString());
         System.out.println("Op: "+getOperator());
+    }
+
+    public boolean isGoal(){
+//        int[][] lista = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
+        int[][] lista = {{0,1,2,3},{4,5,6,7},{8,9,10,11},{12,13,14,15}};
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if(getState()[i][j] != lista[i][j]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public List<Node> getNeighbours(){
+        List<Node> list = new ArrayList<>();
+        if(getZeroPos_Y() != 3 ){
+            list.add(RIGHT());
+        } if(getZeroPos_X() != 0 ){
+            list.add(UP());
+        } if(getZeroPos_Y() != 0 ){
+            list.add(LEFT());
+        } if(getZeroPos_X() != 3 ){
+            list.add(DOWN());
+        }
+        return list;
     }
 
 }
