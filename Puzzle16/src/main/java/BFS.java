@@ -19,6 +19,7 @@ public class BFS {
 //            U.add(n)
 //            return FAILURE
     public static boolean BFS(Node node){
+        int counter = 0;
         if(node.isGoal()){
             return true;
         }
@@ -26,12 +27,15 @@ public class BFS {
         HashSet<Node> U= new HashSet<>();
         U.add(node);
         Q.add(node);
+        Node v;
         node.printState();
         while(!Q.isEmpty()){
-           Node v = Q.pop();
+           v = Q.pop();
             for (Node n: v.getNeighbours()) {
-                n.printState();
-                if(n.isGoal()) {
+                counter++;
+                if(v.isGoal()) {
+                    System.out.println(counter);
+                    n.printState();
                     return true;}
                 if(!U.contains(n)){
                     Q.add(n);

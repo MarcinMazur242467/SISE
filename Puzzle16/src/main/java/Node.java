@@ -1,28 +1,35 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Node {
 
-    private  Node parentNode;
-    private int [][] state;
-    private int zeroPos_X;
-    private int zeroPos_Y;
-    private char operator;
+    private final Node parentNode;
+    private final int [][] state;
+    private final int zeroPos_X;
+    private final int zeroPos_Y;
+    private final char operator;
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Node)) return false;
-        Node node = (Node) o;
-        return state == node.getState();
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Node other = (Node) obj;
+        return Arrays.deepEquals(state, other.state);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(state);
+        return Arrays.deepHashCode(state);
     }
+
+
 
     public int[][] getState(){
         return this.state;
@@ -35,29 +42,21 @@ public class Node {
         this.zeroPos_Y = zeroPos_Y;
         this.operator = operator;
     }
-    public Node LEFT(){
-        int[][] state = getState();
-        state[zeroPos_X][zeroPos_Y] = state[zeroPos_X][zeroPos_Y-1];
-        state[zeroPos_X][zeroPos_Y-1]=0;
-        return new Node(this,state,zeroPos_X,zeroPos_Y-1,'L');
-    }
-    public Node RIGHT() {
-        int[][] state = getState();
-        state[zeroPos_X][zeroPos_Y] = state[zeroPos_X][zeroPos_Y + 1];
-        state[zeroPos_X][zeroPos_Y + 1] = 0;
-        return new Node(this, state, zeroPos_X, zeroPos_Y + 1, 'R');
-    }
 
-    public Node UP(){
-        int[][] state = getState();
-        state[zeroPos_X][zeroPos_Y] = state[zeroPos_X-1][zeroPos_Y];
-        state[zeroPos_X-1][zeroPos_Y]=0;
-        return new Node(this, state, zeroPos_X-1, zeroPos_Y, 'U');
-    } public Node DOWN(){
-        int[][] state = getState();
-        state[zeroPos_X][zeroPos_Y] = state[zeroPos_X+1][zeroPos_Y];
-        state[zeroPos_X+1][zeroPos_Y]=0;
-        return new Node(this, state, zeroPos_X+1, zeroPos_Y, 'D');
+    private int[][] moveTile(int[][] state, int x1, int y1, int x2, int y2) {
+        int[][] newState = new int[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                newState[i][j] = state[i][j];
+            }
+        }
+        int temp = newState[x1][y1];
+        newState[x1][y1] = newState[x2][y2];
+        newState[x2][y2] = temp;
+        if (Arrays.deepEquals(newState, state)) {
+            return null;
+        }
+        return newState;
     }
 
     public Node getParentNode() {
@@ -91,8 +90,7 @@ public class Node {
     }
 
     public boolean isGoal(){
-//        int[][] lista = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
-        int[][] lista = {{0,1,2,3},{4,5,6,7},{8,9,10,11},{12,13,14,15}};
+        int[][] lista = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if(getState()[i][j] != lista[i][j]){
@@ -102,16 +100,37 @@ public class Node {
         }
         return true;
     }
-    public List<Node> getNeighbours(){
+
+    public List<Node> getNeighbours() {
+        int[][] state = getState();
         List<Node> list = new ArrayList<>();
-        if(getZeroPos_Y() != 3 ){
-            list.add(RIGHT());
-        } if(getZeroPos_X() != 0 ){
-            list.add(UP());
-        } if(getZeroPos_Y() != 0 ){
-            list.add(LEFT());
-        } if(getZeroPos_X() != 3 ){
-            list.add(DOWN());
+        if (getZeroPos_Y() != 3) {
+            int[][] right = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() + 1);
+            Node rightNode = new Node(this,right,getZeroPos_X(),getZeroPos_Y() + 1,'R');
+            if (right != null) {
+                list.add(rightNode);
+            }
+        }
+        if (getZeroPos_X() != 0) {
+            int[][] up = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()-1, getZeroPos_Y());
+            Node upNode = new Node(this,up,getZeroPos_X()-1,getZeroPos_Y(),'U');
+            if (up != null) {
+                list.add(upNode);
+            }
+        }
+        if (getZeroPos_Y() != 0) {
+            int[][] left = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() - 1);
+            Node leftNode = new Node(this,left,getZeroPos_X(),getZeroPos_Y() - 1,'L');
+            if (left != null) {
+                list.add(leftNode);
+            }
+        }
+        if (getZeroPos_X() != 3) {
+            int[][] down = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()+1, getZeroPos_Y());
+            Node downNode = new Node(this,down,getZeroPos_X()+1,getZeroPos_Y(),'D');
+            if (down != null) {
+                list.add(downNode);
+            }
         }
         return list;
     }

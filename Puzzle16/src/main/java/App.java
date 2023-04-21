@@ -4,7 +4,7 @@ public class App {
 
         Node node = DataAccess.initialNode();
         if(BFS.BFS(node)){
-            System.out.println("DUPA");
+            System.out.println("SUCCESS");
         }else{
             System.out.println("FALSE");
         }
