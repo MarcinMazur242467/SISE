@@ -23,19 +23,19 @@ public class BFS {
         if(node.isGoal()){
             return true;
         }
-        ArrayDeque<Node> Q = new ArrayDeque<Node>();
+        ArrayDeque<Node> Q = new ArrayDeque<>();
         HashSet<Node> U= new HashSet<>();
         U.add(node);
         Q.add(node);
         Node v;
-        node.printState();
+//        node.printState();
         while(!Q.isEmpty()){
            v = Q.pop();
             for (Node n: v.getNeighbours()) {
                 counter++;
                 if(v.isGoal()) {
-                    System.out.println(counter);
-                    n.printState();
+                    System.out.println("BFS iterations: "+counter);
+//                    v.printState();
                     return true;}
                 if(!U.contains(n)){
                     Q.add(n);
