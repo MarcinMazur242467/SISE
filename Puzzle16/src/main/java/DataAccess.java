@@ -55,7 +55,7 @@ public class DataAccess {
                 }
             }
         }
-        Node node = new Node(null,list,x,y,' ');
+        Node node = new Node(null,list,x,y,' ',0);
         return  node;
     }
 
