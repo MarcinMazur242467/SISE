@@ -1,11 +1,12 @@
 import java.io.*;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class DataAccess {
     private static int[][] list;
 
-    public static void readFile() {
-        File file = new File(DataAccess.class.getClassLoader().getResource("test.txt").getPath());
+    public static void readFile(String filePath) {
+        File file = new File(filePath);
         int[][] numbers = new int[4][4]; // zakładamy, że plik zawiera maksymalnie 100 wierszy
         int row = 0;
         boolean skipFirstLine = true; // zmienna określająca, czy należy pominąć pierwszy wiersz
@@ -43,10 +44,10 @@ public class DataAccess {
             }
         }
     }
-    public static Node initialNode(){
+    public static Node initialNode(String filePath){
         int x = 0;
         int y = 0;
-        readFile();
+        readFile(filePath);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if(list[i][j]==0){
