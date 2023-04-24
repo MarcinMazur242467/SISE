@@ -104,35 +104,48 @@ public class Node {
         return depth;
     }
 
-    public List<Node> getNeighbours() {
+    public List<Node> getNeighbours(String order) {
         int[][] state = getState();
         List<Node> list = new ArrayList<>();
-        if (getZeroPos_Y() != 3) {
-            int[][] right = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() + 1);
-            Node rightNode = new Node(this,right,getZeroPos_X(),getZeroPos_Y() + 1,'R',getDepth()+1);
-            if (right != null) {
-                list.add(rightNode);
-            }
-        }
-        if (getZeroPos_X() != 0) {
-            int[][] up = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()-1, getZeroPos_Y());
-            Node upNode = new Node(this,up,getZeroPos_X()-1,getZeroPos_Y(),'U',getDepth()+1);
-            if (up != null) {
-                list.add(upNode);
-            }
-        }
-        if (getZeroPos_Y() != 0) {
-            int[][] left = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() - 1);
-            Node leftNode = new Node(this,left,getZeroPos_X(),getZeroPos_Y() - 1,'L',getDepth()+1);
-            if (left != null) {
-                list.add(leftNode);
-            }
-        }
-        if (getZeroPos_X() != 3) {
-            int[][] down = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()+1, getZeroPos_Y());
-            Node downNode = new Node(this,down,getZeroPos_X()+1,getZeroPos_Y(),'D',getDepth()+1);
-            if (down != null) {
-                list.add(downNode);
+        for (int i = 0; i < order.length(); i++) {
+            char c = order.charAt(i);
+            switch (c){
+                case 'R':
+                    if (getZeroPos_Y() != 3) {
+                        int[][] right = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() + 1);
+                        Node rightNode = new Node(this,right,getZeroPos_X(),getZeroPos_Y() + 1,'R',getDepth()+1);
+                        if (right != null) {
+                            list.add(rightNode);
+                        }
+                    }
+                    break;
+                case 'U':
+                    if (getZeroPos_X() != 0) {
+                        int[][] up = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()-1, getZeroPos_Y());
+                        Node upNode = new Node(this,up,getZeroPos_X()-1,getZeroPos_Y(),'U',getDepth()+1);
+                        if (up != null) {
+                            list.add(upNode);
+                        }
+                    }
+                    break;
+                case 'L':
+                    if (getZeroPos_Y() != 0) {
+                        int[][] left = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() - 1);
+                        Node leftNode = new Node(this,left,getZeroPos_X(),getZeroPos_Y() - 1,'L',getDepth()+1);
+                        if (left != null) {
+                            list.add(leftNode);
+                        }
+                    }
+                    break;
+                case 'D':
+                    if (getZeroPos_X() != 3) {
+                        int[][] down = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()+1, getZeroPos_Y());
+                        Node downNode = new Node(this,down,getZeroPos_X()+1,getZeroPos_Y(),'D',getDepth()+1);
+                        if (down != null) {
+                            list.add(downNode);
+                        }
+                    }
+                    break;
             }
         }
         return list;

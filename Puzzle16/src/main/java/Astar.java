@@ -3,7 +3,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class Astar {
-    public static boolean Astar(Node node,Comparator<Node> nodeComparator){
+    public static boolean Astar(Node node,Comparator<Node> nodeComparator,String order){
         int counter = 0;
         PriorityQueue<Node> P = new PriorityQueue<>(nodeComparator);
         HashSet<Node> T = new HashSet<>();
@@ -17,7 +17,7 @@ public class Astar {
                     return true;
                 }
                 T.add(v);
-                for (Node n: v.getNeighbours()) {
+                for (Node n: v.getNeighbours(order)) {
                     if(!T.contains(n)){
                         P.add(n);
                     }

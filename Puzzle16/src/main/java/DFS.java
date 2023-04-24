@@ -2,7 +2,7 @@ import java.util.*;
 
 public class DFS {
     private static final int maxDepth = 20;
-    public static boolean DFS(Node node){
+    public static boolean DFS(Node node, String order){
         int counter = 0;
         if(node.isGoal()) return true;
         Stack<Node> S = new Stack<>();
@@ -11,7 +11,7 @@ public class DFS {
         while (!S.isEmpty()){
             Node v = S.pop();
             T.add(v);
-            List<Node> neighbours = v.getNeighbours();
+            List<Node> neighbours = v.getNeighbours(order);
             Collections.reverse(neighbours);
             for (Node n: neighbours) {
                 counter++;

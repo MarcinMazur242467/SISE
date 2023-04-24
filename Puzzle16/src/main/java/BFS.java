@@ -2,23 +2,7 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 
 public class BFS {
-//    function bfs(G, s)// graf i stan poczatkowy
-//	if(G.isGoal(s))
-//            return SUCCESS
-//    Q = queue()//kolejka
-//    U = set()//lista stanow osiaganietych
-//	U.add(s)
-//            Q.enqueue(s)
-//            while(!Q.isEmpty())
-//    v = Q.dequeue()
-//            for n in G.neighbours(v)
-//            if(!U.has(n))
-//            if G.isGoal(n)
-//            return SCUUCESS
-//				Q.enqueues(n)
-//            U.add(n)
-//            return FAILURE
-    public static boolean BFS(Node node){
+    public static boolean BFS(Node node, String order){
         int counter = 0;
         if(node.isGoal()){
             return true;
@@ -31,7 +15,7 @@ public class BFS {
 //        node.printState();
         while(!Q.isEmpty()){
            v = Q.pop();
-            for (Node n: v.getNeighbours()) {
+            for (Node n: v.getNeighbours(order)) {
                 counter++;
                 if(v.isGoal()) {
                     System.out.println("BFS iterations: "+counter);
