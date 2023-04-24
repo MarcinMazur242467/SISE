@@ -107,6 +107,7 @@ public class Node {
     public List<Node> getNeighbours(String order) {
         int[][] state = getState();
         List<Node> list = new ArrayList<>();
+        if(order==null) order = "RULD";
         for (int i = 0; i < order.length(); i++) {
             char c = order.charAt(i);
             switch (c){

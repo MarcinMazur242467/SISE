@@ -16,13 +16,13 @@ public class App {
             System.out.println("DFS - FALSE");
         }
 
-        if(Astar.Astar(node,Node.hammingComparator, "RDUL")){
+        if(Astar.Astar(node,Node.hammingComparator)){
             System.out.println("Astar hamming - SUCCESS");
         }else{
             System.out.println("Astar hamming - FALSE");
         }
 
-        if(Astar.Astar(node,Node.manhattanComparator, "RDUL")){
+        if(Astar.Astar(node,Node.manhattanComparator)){
             System.out.println("Astar manhattan - SUCCESS");
         }else{
             System.out.println("Astar manhattan - FALSE");
