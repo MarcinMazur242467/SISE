@@ -19,7 +19,6 @@ public class Astar {
                 T.add(v);
                 for (Node n: v.getNeighbours()) {
                     if(!T.contains(n)){
-                        // trzeba tu jeszcze obliczc dotychczasowy czas dotarcia do wezla i brac pod uwage w comparatorze
                         P.add(n);
                     }
                 }

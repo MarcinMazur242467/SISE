@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class DFS {
-    private static final int maxDepth = 30;
+    private static final int maxDepth = 20;
     public static boolean DFS(Node node){
         int counter = 0;
         if(node.isGoal()) return true;

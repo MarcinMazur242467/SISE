@@ -140,28 +140,34 @@ public class Node {
 
     private int hamming(){
         int hammingsCounter = 0;
-        int [][] completedBoard = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if(getState()[i][j] != completedBoard[i][j]) hammingsCounter++;
+        if(getParentNode()!=null) {
+            int[][] completedBoard = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (getState()[i][j] != completedBoard[i][j]) hammingsCounter++;
+                }
             }
         }
+        hammingsCounter+=getDepth();
         return hammingsCounter;
     }
 
     private int manhattan(){
         int moves = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                int value = getState()[i][j];
-                if (value != 0) {
-                    int targetRow = (value - 1) / 4; // pozycja wiersza w stanie docelowym
-                    int targetCol = (value - 1) % 4; // pozycja kolumny w stanie docelowym
-                    int distance = Math.abs(targetRow - i) + Math.abs(targetCol - j); // liczba potrzebnych ruchów
-                    moves += distance;
+        if(getParentNode()!=null) {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    int value = getState()[i][j];
+                    if (value != 0) {
+                        int targetRow = (value - 1) / 4; // pozycja wiersza w stanie docelowym
+                        int targetCol = (value - 1) % 4; // pozycja kolumny w stanie docelowym
+                        int distance = Math.abs(targetRow - i) + Math.abs(targetCol - j); // liczba potrzebnych ruchów
+                        moves += distance;
+                    }
                 }
             }
         }
+        moves+=getDepth();
         return moves/2; // dzielenie przez 2, bo trzeba uwzglednic, ze jak jeden sie ruszy to drugi tez
     }
 
