@@ -1,36 +1,34 @@
-import java.io.File;
 import java.util.Objects;
 
 public class App {
     public static void main(String[] args) {
         Node node = DataAccess.initialNode("D:\\JavaProjects\\SISE\\Puzzle16\\src\\main\\resources\\test.txt");
-        if(BFS.BFS(node, "RDUL")){
+        if (BFS.BFS(node, "RDUL")) {
             System.out.println("BFS - SUCCESS");
-        }else {
+        } else {
             System.out.println("BFS - FALSE");
         }
-
-        if(DFS.DFS(node, "RDUL")){
+        System.out.println("\n");
+        if (DFS.DFS(node, "RDUL")) {
             System.out.println("DFS - SUCCESS");
-        }else{
+        } else {
             System.out.println("DFS - FALSE");
         }
-
-        if(Astar.Astar(node,Node.hammingComparator)){
+        System.out.println("\n");
+        if (Astar.Astar(node, Node.hammingComparator)) {
             System.out.println("Astar hamming - SUCCESS");
-        }else{
+        } else {
             System.out.println("Astar hamming - FALSE");
         }
-
-        if(Astar.Astar(node,Node.manhattanComparator)){
+        System.out.println("\n");
+        if (Astar.Astar(node, Node.manhattanComparator)) {
             System.out.println("Astar manhattan - SUCCESS");
-        }else{
+        } else {
             System.out.println("Astar manhattan - FALSE");
         }
 
 
-
-//        Node node = DataAccess.initialNode(args[2]); przygotowane pod konsole
+//        Node node = DataAccess.initialNode(args[2]);
 //        switch (args[0]) {
 //            case "bfs" -> {
 //                if (BFS.BFS(node, args[1])) {

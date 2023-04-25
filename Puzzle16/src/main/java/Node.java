@@ -3,7 +3,7 @@ import java.util.*;
 public class Node {
 
     private final Node parentNode;
-    private final int [][] state;
+    private final int[][] state;
     private final int zeroPos_X;
     private final int zeroPos_Y;
     private final char operator;
@@ -28,8 +28,7 @@ public class Node {
     }
 
 
-
-    public int[][] getState(){
+    public int[][] getState() {
         return this.state;
     }
 
@@ -61,38 +60,40 @@ public class Node {
     public Node getParentNode() {
         return parentNode;
     }
+
     public int getZeroPos_X() {
-        return  zeroPos_X;
+        return zeroPos_X;
     }
 
     public int getZeroPos_Y() {
         return zeroPos_Y;
     }
+
     public char getOperator() {
         return operator;
     }
 
-    public void  printState(){
+    public void printState() {
         System.out.println();
-        System.out.println("Parent: "+getParentNode());
-        System.out.println("X: "+getZeroPos_X());
-        System.out.println("Y: "+getZeroPos_Y());
+        System.out.println("Parent: " + getParentNode());
+        System.out.println("X: " + getZeroPos_X());
+        System.out.println("Y: " + getZeroPos_Y());
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                builder.append(getState()[i][j]+"  ");
+                builder.append(getState()[i][j] + "  ");
             }
             builder.append("\n");
         }
         System.out.println(builder.toString());
-        System.out.println("Op: "+getOperator());
+        System.out.println("Op: " + getOperator());
     }
 
-    public boolean isGoal(){
-        int[][] lista = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,0}};
+    public boolean isGoal() {
+        int[][] lista = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if(getState()[i][j] != lista[i][j]){
+                if (getState()[i][j] != lista[i][j]) {
                     return false;
                 }
             }
@@ -107,54 +108,54 @@ public class Node {
     public List<Node> getNeighbours(String order) {
         int[][] state = getState();
         List<Node> list = new ArrayList<>();
-        if(order==null) order = "RULD";
+        if (order == null) order = "RULD";
         for (int i = 0; i < order.length(); i++) {
             char c = order.charAt(i);
-            switch (c){
-                case 'R':
+            switch (c) {
+                case 'R' -> {
                     if (getZeroPos_Y() != 3) {
                         int[][] right = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() + 1);
-                        Node rightNode = new Node(this,right,getZeroPos_X(),getZeroPos_Y() + 1,'R',getDepth()+1);
+                        Node rightNode = new Node(this, right, getZeroPos_X(), getZeroPos_Y() + 1, 'R', getDepth() + 1);
                         if (right != null) {
                             list.add(rightNode);
                         }
                     }
-                    break;
-                case 'U':
+                }
+                case 'U' -> {
                     if (getZeroPos_X() != 0) {
-                        int[][] up = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()-1, getZeroPos_Y());
-                        Node upNode = new Node(this,up,getZeroPos_X()-1,getZeroPos_Y(),'U',getDepth()+1);
+                        int[][] up = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X() - 1, getZeroPos_Y());
+                        Node upNode = new Node(this, up, getZeroPos_X() - 1, getZeroPos_Y(), 'U', getDepth() + 1);
                         if (up != null) {
                             list.add(upNode);
                         }
                     }
-                    break;
-                case 'L':
+                }
+                case 'L' -> {
                     if (getZeroPos_Y() != 0) {
                         int[][] left = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X(), getZeroPos_Y() - 1);
-                        Node leftNode = new Node(this,left,getZeroPos_X(),getZeroPos_Y() - 1,'L',getDepth()+1);
+                        Node leftNode = new Node(this, left, getZeroPos_X(), getZeroPos_Y() - 1, 'L', getDepth() + 1);
                         if (left != null) {
                             list.add(leftNode);
                         }
                     }
-                    break;
-                case 'D':
+                }
+                case 'D' -> {
                     if (getZeroPos_X() != 3) {
-                        int[][] down = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X()+1, getZeroPos_Y());
-                        Node downNode = new Node(this,down,getZeroPos_X()+1,getZeroPos_Y(),'D',getDepth()+1);
+                        int[][] down = moveTile(state, getZeroPos_X(), getZeroPos_Y(), getZeroPos_X() + 1, getZeroPos_Y());
+                        Node downNode = new Node(this, down, getZeroPos_X() + 1, getZeroPos_Y(), 'D', getDepth() + 1);
                         if (down != null) {
                             list.add(downNode);
                         }
                     }
-                    break;
+                }
             }
         }
         return list;
     }
 
-    private int hamming(){
+    private int hamming() {
         int hammingsCounter = 0;
-        if(getParentNode()!=null) {
+        if (getParentNode() != null) {
             int[][] completedBoard = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
@@ -162,13 +163,13 @@ public class Node {
                 }
             }
         }
-        hammingsCounter+=getDepth();
+        hammingsCounter += getDepth();
         return hammingsCounter;
     }
 
-    private int manhattan(){
+    private int manhattan() {
         int moves = 0;
-        if(getParentNode()!=null) {
+        if (getParentNode() != null) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
                     int value = getState()[i][j];
@@ -181,8 +182,8 @@ public class Node {
                 }
             }
         }
-        moves+=getDepth();
-        return moves/2; // dzielenie przez 2, bo trzeba uwzglednic, ze jak jeden sie ruszy to drugi tez
+        moves += getDepth();
+        return moves / 2; // dzielenie przez 2, bo trzeba uwzglednic, ze jak jeden sie ruszy to drugi tez
     }
 
     public static Comparator<Node> hammingComparator = Comparator.comparingInt(Node::hamming);
