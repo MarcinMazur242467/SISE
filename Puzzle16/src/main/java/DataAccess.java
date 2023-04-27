@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.Path;
 import java.util.Scanner;
 
 public class DataAccess {
@@ -37,27 +36,38 @@ public class DataAccess {
         }
         list = numbers;
     }
-    public static void print(){
+
+    public static void print() {
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j <4; j++) {
+            for (int j = 0; j < 4; j++) {
                 System.out.println(list[i][j]);
             }
         }
     }
-    public static Node initialNode(String filePath){
+
+    public static Node initialNode(String filePath) {
         int x = 0;
         int y = 0;
         readFile(filePath);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if(list[i][j]==0){
-                    x=i;
-                    y=j;
+                if (list[i][j] == 0) {
+                    x = i;
+                    y = j;
                 }
             }
         }
-        Node node = new Node(null,list,x,y,' ',0);
-        return  node;
+        return new Node(null, list, x, y, ' ', 0);
+    }
+
+    public static void write(String filePath, StringBuilder message) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(message.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
