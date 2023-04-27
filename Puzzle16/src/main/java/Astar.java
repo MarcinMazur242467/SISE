@@ -15,7 +15,6 @@ public class Astar {
         while (!P.isEmpty()) {
             Node v = P.poll();
             if (!T.contains(v)) {
-                visited++;
                 if (v.isGoal()) {
                     System.out.println("Visited nodes: " + visited);
                     System.out.println("Processed nodes: " + T.size());
@@ -33,6 +32,7 @@ public class Astar {
                 }
                 T.add(v);
                 for (Node n : v.getNeighbours(null)) {
+                    visited++;
                     if (!T.contains(n)) {
                         if (maxDepth < n.getDepth()) maxDepth = n.getDepth();
                         P.add(n);

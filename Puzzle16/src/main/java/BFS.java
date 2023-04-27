@@ -19,6 +19,7 @@ public class BFS {
         while (!Q.isEmpty()) {
             v = Q.pop();
             for (Node n : v.getNeighbours(order)) {
+                visited++;
                 if (v.isGoal()) {
                     System.out.println("Visited nodes: " + visited);
                     System.out.println("Processed nodes: " + U.size());
@@ -34,7 +35,6 @@ public class BFS {
                     System.out.println("Solution length " + solutionCounter);
                     return true;
                 }
-                visited++;
                 if (!U.contains(n)) {
                     Q.add(n);
                     if (n.getDepth() > maxDepth) maxDepth = n.getDepth();
