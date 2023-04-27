@@ -185,7 +185,7 @@ public class Node {
             }
         }
         moves += getDepth();
-        return moves / 2; // dzielenie przez 2, bo trzeba uwzglednic, ze jak jeden sie ruszy to drugi tez
+        return moves;
     }
 
     public static Comparator<Node> hammingComparator = Comparator.comparingInt(Node::hamming);
