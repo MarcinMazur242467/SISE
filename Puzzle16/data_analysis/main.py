@@ -11,6 +11,18 @@ def calculateAvg(depth, array,what):
             sum += items[what]
     return round((sum / counter),3)
 
+def calculateAvgDFS(depth, array,what):
+    counter = 0;
+    sum = 0;
+    for items in array:
+        if items[2] == -1:
+            continue
+        if items[1] == depth:
+            counter += 1;
+            sum += items[what]
+    return round((sum / counter),3)
+
+
 
 def astarPlot(ytitle, hamming, manhattan):
     y_pos = np.arange(len(hamming))
@@ -210,60 +222,60 @@ def main():
             calculateAvg(i, [items for items in bfs if items[0] == "ulrd"], 6)
         ))
         DFS_RDUL.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "rdul"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdul"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdul"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdul"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdul"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdul"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdul"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdul"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdul"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdul"], 6)
         ))
         DFS_RDLU.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "rdlu"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdlu"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdlu"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdlu"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "rdlu"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdlu"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdlu"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdlu"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdlu"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "rdlu"], 6)
         ))
         DFS_DRUL.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "drul"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "drul"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "drul"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "drul"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "drul"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drul"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drul"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drul"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drul"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drul"], 6)
         ))
         DFS_DRLU.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "drlu"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "drlu"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "drlu"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "drlu"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "drlu"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drlu"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drlu"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drlu"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drlu"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "drlu"], 6)
         ))
         DFS_LUDR.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "ludr"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "ludr"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "ludr"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "ludr"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "ludr"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ludr"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ludr"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ludr"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ludr"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ludr"], 6)
         ))
         DFS_LURD.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "lurd"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "lurd"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "lurd"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "lurd"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "lurd"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "lurd"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "lurd"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "lurd"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "lurd"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "lurd"], 6)
         ))
         DFS_ULDR.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "uldr"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "uldr"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "uldr"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "uldr"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "uldr"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "uldr"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "uldr"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "uldr"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "uldr"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "uldr"], 6)
         ))
         DFS_ULRD.append((
-            calculateAvg(i, [items for items in dfs if items[0] == "ulrd"], 2),
-            calculateAvg(i, [items for items in dfs if items[0] == "ulrd"], 3),
-            calculateAvg(i, [items for items in dfs if items[0] == "ulrd"], 4),
-            calculateAvg(i, [items for items in dfs if items[0] == "ulrd"], 5),
-            calculateAvg(i, [items for items in dfs if items[0] == "ulrd"], 6)
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 2),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 3),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 4),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 5),
+            calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 6)
         ))
 
 
@@ -381,6 +393,8 @@ def main():
               [x[4] for x in DFS_LURD],
               [x[4] for x in DFS_ULDR],
               [x[4] for x in DFS_ULRD],False)
+
+
 
 if '__main__':
     main()

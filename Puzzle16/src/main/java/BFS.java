@@ -25,6 +25,7 @@ public class BFS {
         Node v;
         while (!nodesQueue.isEmpty()) {
             v = nodesQueue.pop();
+            if (v.getDepth() > maxDepth) maxDepth = v.getDepth();
             for (Node n : v.getNeighbours(order)) {
                 visited++;
                 if (v.isGoal()) {
@@ -42,7 +43,6 @@ public class BFS {
                 }
                 if (!visitedNodes.contains(n)) {
                     nodesQueue.add(n);
-                    if (n.getDepth() > maxDepth) maxDepth = n.getDepth();
                     visitedNodes.add(n);
                 }
             }

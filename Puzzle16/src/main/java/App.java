@@ -5,32 +5,16 @@ public class App {
         Node node = DataAccess.initialNode(args[2]);
         switch (args[0]) {
             case "bfs" -> {
-                if (BFS.BFS(node, args[1], args[3], args[4])) {
-                    System.out.println("BFS - SUCCESS");
-                } else {
-                    System.out.println("BFS - FALSE");
-                }
+                BFS.BFS(node, args[1], args[3], args[4]);
             }
             case "dfs" -> {
-                if (DFS.DFS(node, args[1], args[3], args[4])) {
-                    System.out.println("DFS - SUCCESS");
-                } else {
-                    System.out.println("DFS - FALSE");
-                }
+                DFS.DFS(node, args[1], args[3], args[4]);
             }
             case "astr" -> {
                 if (Objects.equals(args[1], "manh")) {
-                    if (Astar.Astar(node, Node.manhattanComparator, args[3], args[4])) {
-                        System.out.println("Astar hamming - SUCCESS");
-                    } else {
-                        System.out.println("Astar hamming - FALSE");
-                    }
+                    Astar.Astar(node, Node.manhattanComparator, args[3], args[4]);
                 } else if (Objects.equals(args[1], "hamm")) {
-                    if (Astar.Astar(node, Node.hammingComparator, args[3], args[4])) {
-                        System.out.println("Astar hamming - SUCCESS");
-                    } else {
-                        System.out.println("Astar hamming - FALSE");
-                    }
+                    Astar.Astar(node, Node.hammingComparator, args[3], args[4]);
                 }
             }
         }
