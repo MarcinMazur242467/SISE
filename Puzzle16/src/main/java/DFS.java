@@ -27,10 +27,11 @@ public class DFS {
             visitedNodes.add(v);
             List<Node> neighbours = v.getNeighbours(order);
             Collections.reverse(neighbours);
-            if (localMaxDepth < v.getDepth()) localMaxDepth = v.getDepth();
             for (Node n : neighbours) {
                 visited++;
+                if (n.getDepth() > localMaxDepth) localMaxDepth = n.getDepth();
                 if (n.isGoal()) {
+                    System.out.println(localMaxDepth);
                     double endTime = System.nanoTime();
                     while (n.getParentNode() != null) {
                         solution.append(n.getOperator());
