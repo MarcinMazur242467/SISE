@@ -284,7 +284,7 @@ def main():
     plotGeneral("Liczba stanów odwiedzonych", [x[1] for x in plotBFS], [x[1] for x in plotDFS], [x[1] for x in plotASTAR],True)
     plotGeneral("Liczba stanów przetworzonych", [x[2] for x in plotBFS], [x[2] for x in plotDFS], [x[2] for x in plotASTAR],True)
     plotGeneral("Maksymalna głębokość", [x[3] for x in plotBFS], [x[3] for x in plotDFS], [x[3] for x in plotASTAR],False)
-    plotGeneral("Czas trwania obliczen", [x[4] for x in plotBFS], [x[4] for x in plotDFS], [x[4] for x in plotASTAR],False)
+    plotGeneral("Czas trwania obliczen", [x[4] for x in plotBFS], [x[4] for x in plotDFS], [x[4] for x in plotASTAR],True)
 
     astarPlot("Długość rozwiązania", [x[0] for x in plotHamming], [x[0] for x in plotManhattan])
     astarPlot("Liczba stanów odwiedzonych", [x[1] for x in plotHamming], [x[1] for x in plotManhattan])
@@ -392,7 +392,7 @@ def main():
               [x[4] for x in DFS_LUDR],
               [x[4] for x in DFS_LURD],
               [x[4] for x in DFS_ULDR],
-              [x[4] for x in DFS_ULRD],False)
+              [x[4] for x in DFS_ULRD],True)
 
 
 

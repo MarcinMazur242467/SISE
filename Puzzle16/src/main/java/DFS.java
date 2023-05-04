@@ -27,14 +27,15 @@ public class DFS {
             visitedNodes.add(v);
             List<Node> neighbours = v.getNeighbours(order);
             Collections.reverse(neighbours);
+            if (localMaxDepth < v.getDepth()) localMaxDepth = v.getDepth();
             for (Node n : neighbours) {
                 visited++;
                 if (n.isGoal()) {
                     double endTime = System.nanoTime();
-                    while (v.getParentNode() != null) {
-                        solution.append(v.getOperator());
+                    while (n.getParentNode() != null) {
+                        solution.append(n.getOperator());
                         solutionLength++;
-                        v = v.getParentNode();
+                        n = n.getParentNode();
                     }
                     statsFile.append(solutionLength).append("\n").append(visited).append("\n").append(visitedNodes.size()).append("\n").append(localMaxDepth).append("\n").append(String.format("%.3g", ((endTime - startTime) / 1000000)));
                     DataAccess.write(statsFileName, statsFile);
@@ -43,7 +44,6 @@ public class DFS {
                     return true;
                 }
                 if (!visitedNodes.contains(n) && !nodesStack.contains(n) && n.getDepth() <= maxDepth) {
-                    if (localMaxDepth < n.getDepth()) localMaxDepth = n.getDepth();
                     nodesStack.push(n);
                 }
             }
