@@ -2,31 +2,31 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def calculateAvg(depth, array,what):
-    counter = 0;
-    sum = 0;
+def calculateAvg(depth, array, what):
+    counter = 0
+    sum = 0
     for items in array:
         if items[1] == depth:
-            counter += 1;
+            counter += 1
             sum += items[what]
-    return round((sum / counter),3)
+    return round((sum / counter), 3)
 
-def calculateAvgDFS(depth, array,what):
-    counter = 0;
-    sum = 0;
+
+def calculateAvgDFS(depth, array, what):
+    counter = 0
+    sum = 0
     for items in array:
         if items[2] == -1:
             continue
         if items[1] == depth:
-            counter += 1;
+            counter += 1
             sum += items[what]
-    return round((sum / counter),3)
-
+    return round((sum / counter), 3)
 
 
 def astarPlot(ytitle, hamming, manhattan):
     y_pos = np.arange(len(hamming))
-    fig,axs = plt.subplots(figsize=(10, 7))
+    fig, axs = plt.subplots(figsize=(10, 7))
     plt.bar(y_pos - 0.15, hamming, width=0.3, color="#1F77B4", label="Hamming")
     plt.bar(y_pos + 0.15, manhattan, width=0.3, color="orange", label="Manhattan")
     plt.legend()
@@ -37,19 +37,20 @@ def astarPlot(ytitle, hamming, manhattan):
     plt.xticks(fontsize=20)
     plt.xticks(y_pos, range(1, 8, 1))
     plt.show()
-    fig.savefig(ytitle+"_ASTAR.png")
+    fig.savefig(ytitle + "_ASTAR.png")
 
-def orderPlot(title,ytitle,RDUL,RDLU,DRUL,DRLU,LUDR,LURD,ULDR,ULRD,log):
+
+def orderPlot(title, ytitle, RDUL, RDLU, DRUL, DRLU, LUDR, LURD, ULDR, ULRD, log,yaxis):
     y_pos = np.arange(len(RDUL))
-    fig,ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 7))
     plt.bar(y_pos - 0.4, RDUL, width=0.1, color="#1F77B4", label="RDUL")
     plt.bar(y_pos - 0.3, RDLU, width=0.1, color="orange", label="RDLU")
     plt.bar(y_pos - 0.2, DRUL, width=0.1, color="green", label="DRUL")
     plt.bar(y_pos - 0.1, DRLU, width=0.1, color="red", label="DRLU")
-    plt.bar(y_pos,LUDR, width=0.1, color="purple", label="LURD")
-    plt.bar(y_pos+0.1,LURD, width=0.1, color="brown", label="LURD")
-    plt.bar(y_pos+0.2,ULDR, width=0.1, color="pink", label="ULDR")
-    plt.bar(y_pos+0.3,ULRD, width=0.1, color="grey", label="ULRD")
+    plt.bar(y_pos, LUDR, width=0.1, color="purple", label="LURD")
+    plt.bar(y_pos + 0.1, LURD, width=0.1, color="brown", label="LURD")
+    plt.bar(y_pos + 0.2, ULDR, width=0.1, color="pink", label="ULDR")
+    plt.bar(y_pos + 0.3, ULRD, width=0.1, color="grey", label="ULRD")
     plt.legend()
     plt.title(title, fontsize=25)
     plt.ylabel(ytitle, fontsize=20)
@@ -57,14 +58,17 @@ def orderPlot(title,ytitle,RDUL,RDLU,DRUL,DRLU,LUDR,LURD,ULDR,ULRD,log):
     plt.yticks(fontsize=20)
     plt.xticks(fontsize=20)
     plt.xticks(y_pos, range(1, 8, 1))
+    if len(yaxis) != 0:
+        plt.yticks(yaxis)
     if log:
         plt.yscale("log")
     plt.show()
-    fig.savefig(title+"_"+ytitle+"_ORDER.png")
+    fig.savefig(title + "_" + ytitle + "_ORDER.png")
 
-def plotGeneral(ytitle, bfs, dfs, astar,log):
+
+def plotGeneral(ytitle, bfs, dfs, astar, log, yaxis):
     y_pos = np.arange(len(bfs))
-    fig,ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 7))
     plt.bar(y_pos - 0.2, bfs, width=0.2, color="#1F77B4", label="BFS")
     plt.bar(y_pos, dfs, width=0.2, color="orange", label="DFS")
     plt.bar(y_pos + 0.2, astar, width=0.2, color="green", label="A*")
@@ -75,11 +79,13 @@ def plotGeneral(ytitle, bfs, dfs, astar,log):
     plt.yticks(fontsize=20)
     plt.xticks(fontsize=20)
     plt.xticks(y_pos, range(1, 8, 1))
+    if len(yaxis) != 0:
+        plt.yticks(yaxis)
     if log:
         plt.yscale("log")
 
     plt.show()
-    fig.savefig(ytitle+"_GENERAL.png")
+    fig.savefig(ytitle + "_GENERAL.png")
 
 
 def main():
@@ -166,11 +172,11 @@ def main():
             calculateAvg(i, [items for items in astar if items[0] == "manh"], 6)
         ))
         BFS_RDUL.append((
-            calculateAvg(i,[items for items in bfs if items[0] == "rdul"],2),
-            calculateAvg(i,[items for items in bfs if items[0] == "rdul"],3),
-            calculateAvg(i,[items for items in bfs if items[0] == "rdul"],4),
-            calculateAvg(i,[items for items in bfs if items[0] == "rdul"],5),
-            calculateAvg(i,[items for items in bfs if items[0] == "rdul"],6)
+            calculateAvg(i, [items for items in bfs if items[0] == "rdul"], 2),
+            calculateAvg(i, [items for items in bfs if items[0] == "rdul"], 3),
+            calculateAvg(i, [items for items in bfs if items[0] == "rdul"], 4),
+            calculateAvg(i, [items for items in bfs if items[0] == "rdul"], 5),
+            calculateAvg(i, [items for items in bfs if items[0] == "rdul"], 6)
         ))
         BFS_RDLU.append((
             calculateAvg(i, [items for items in bfs if items[0] == "rdlu"], 2),
@@ -278,20 +284,22 @@ def main():
             calculateAvgDFS(i, [items for items in dfs if items[0] == "ulrd"], 6)
         ))
 
-
-
-    plotGeneral("Długość rozwiązania", [x[0] for x in plotBFS], [x[0] for x in plotDFS], [x[0] for x in plotASTAR],False)
-    plotGeneral("Liczba stanów odwiedzonych", [x[1] for x in plotBFS], [x[1] for x in plotDFS], [x[1] for x in plotASTAR],True)
-    plotGeneral("Liczba stanów przetworzonych", [x[2] for x in plotBFS], [x[2] for x in plotDFS], [x[2] for x in plotASTAR],True)
-    plotGeneral("Maksymalna głębokość", [x[3] for x in plotBFS], [x[3] for x in plotDFS], [x[3] for x in plotASTAR],False)
-    plotGeneral("Czas trwania obliczen", [x[4] for x in plotBFS], [x[4] for x in plotDFS], [x[4] for x in plotASTAR],True)
+    plotGeneral("Długość rozwiązania", [x[0] for x in plotBFS], [x[0] for x in plotDFS], [x[0] for x in plotASTAR],
+                False, [])
+    plotGeneral("Liczba stanów odwiedzonych", [x[1] for x in plotBFS], [x[1] for x in plotDFS],
+                [x[1] for x in plotASTAR], True, [])
+    plotGeneral("Liczba stanów przetworzonych", [x[2] for x in plotBFS], [x[2] for x in plotDFS],
+                [x[2] for x in plotASTAR], True, [])
+    plotGeneral("Maksymalna głębokość", [x[3] for x in plotBFS], [x[3] for x in plotDFS], [x[3] for x in plotASTAR],
+                False, range(0, 21, 2))
+    plotGeneral("Czas trwania obliczen", [x[4] for x in plotBFS], [x[4] for x in plotDFS], [x[4] for x in plotASTAR],
+                True, [])
 
     astarPlot("Długość rozwiązania", [x[0] for x in plotHamming], [x[0] for x in plotManhattan])
     astarPlot("Liczba stanów odwiedzonych", [x[1] for x in plotHamming], [x[1] for x in plotManhattan])
     astarPlot("Liczba stanów przetworzonych", [x[2] for x in plotHamming], [x[2] for x in plotManhattan])
     astarPlot("Maksymalna głębokość", [x[3] for x in plotHamming], [x[3] for x in plotManhattan])
     astarPlot("Czas trwania obliczeń", [x[4] for x in plotHamming], [x[4] for x in plotManhattan])
-
 
     orderPlot("BFS", "Długość rozwiązania",
               [x[0] for x in BFS_RDUL],
@@ -301,7 +309,8 @@ def main():
               [x[0] for x in BFS_LUDR],
               [x[0] for x in BFS_LURD],
               [x[0] for x in BFS_ULDR],
-              [x[0] for x in BFS_ULRD],False)
+              [x[0] for x in BFS_ULRD],
+              False,[])
 
     orderPlot("BFS", "Liczba stanów odwiedzonych",
               [x[1] for x in BFS_RDUL],
@@ -312,7 +321,7 @@ def main():
               [x[1] for x in BFS_LURD],
               [x[1] for x in BFS_ULDR],
               [x[1] for x in BFS_ULRD],
-              True)
+              True,[])
 
     orderPlot("BFS", "Liczba stanów przetworzonych",
               [x[2] for x in BFS_RDUL],
@@ -322,7 +331,8 @@ def main():
               [x[2] for x in BFS_LUDR],
               [x[2] for x in BFS_LURD],
               [x[2] for x in BFS_ULDR],
-              [x[2] for x in BFS_ULRD],True)
+              [x[2] for x in BFS_ULRD],
+              True,[])
 
     orderPlot("BFS", "Maksymlana głębokość",
               [x[3] for x in BFS_RDUL],
@@ -332,7 +342,8 @@ def main():
               [x[3] for x in BFS_LUDR],
               [x[3] for x in BFS_LURD],
               [x[3] for x in BFS_ULDR],
-              [x[3] for x in BFS_ULRD],False)
+              [x[3] for x in BFS_ULRD],
+              False,[])
 
     orderPlot("BFS", "Czas trwania obliczeń",
               [x[4] for x in BFS_RDUL],
@@ -342,7 +353,8 @@ def main():
               [x[4] for x in BFS_LUDR],
               [x[4] for x in BFS_LURD],
               [x[4] for x in BFS_ULDR],
-              [x[4] for x in BFS_ULRD],False)
+              [x[4] for x in BFS_ULRD],
+              False,[])
 
     orderPlot("DFS", "Długość rozwiązania",
               [x[0] for x in DFS_RDUL],
@@ -352,7 +364,8 @@ def main():
               [x[0] for x in DFS_LUDR],
               [x[0] for x in DFS_LURD],
               [x[0] for x in DFS_ULDR],
-              [x[0] for x in DFS_ULRD],False)
+              [x[0] for x in DFS_ULRD],
+              False,range(0,19,2))
 
     orderPlot("DFS", "Liczba stanów odwiedzonych",
               [x[1] for x in DFS_RDUL],
@@ -362,7 +375,8 @@ def main():
               [x[1] for x in DFS_LUDR],
               [x[1] for x in DFS_LURD],
               [x[1] for x in DFS_ULDR],
-              [x[1] for x in DFS_ULRD],True)
+              [x[1] for x in DFS_ULRD],
+              True,[])
 
     orderPlot("DFS", "Liczba stanów przetworzonych",
               [x[2] for x in DFS_RDUL],
@@ -372,7 +386,8 @@ def main():
               [x[2] for x in DFS_LUDR],
               [x[2] for x in DFS_LURD],
               [x[2] for x in DFS_ULDR],
-              [x[2] for x in DFS_ULRD],True)
+              [x[2] for x in DFS_ULRD],
+              True,[])
 
     orderPlot("DFS", "Maksymlana głębokość",
               [x[3] for x in DFS_RDUL],
@@ -382,7 +397,8 @@ def main():
               [x[3] for x in DFS_LUDR],
               [x[3] for x in DFS_LURD],
               [x[3] for x in DFS_ULDR],
-              [x[3] for x in DFS_ULRD],False)
+              [x[3] for x in DFS_ULRD],
+              False,range(0,21,2))
 
     orderPlot("DFS", "Czas trwania obliczeń",
               [x[4] for x in DFS_RDUL],
@@ -392,8 +408,8 @@ def main():
               [x[4] for x in DFS_LUDR],
               [x[4] for x in DFS_LURD],
               [x[4] for x in DFS_ULDR],
-              [x[4] for x in DFS_ULRD],True)
-
+              [x[4] for x in DFS_ULRD],
+              True,[])
 
 
 if '__main__':
